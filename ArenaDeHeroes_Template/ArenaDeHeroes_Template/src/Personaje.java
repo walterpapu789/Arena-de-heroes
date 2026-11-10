@@ -142,4 +142,3 @@ public void descansar(){
         curar(cantidad);
     }
     }
-
