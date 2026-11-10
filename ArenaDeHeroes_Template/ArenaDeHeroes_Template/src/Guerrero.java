@@ -2,8 +2,8 @@ public class Guerrero extends Personaje {
     private int furia;
     private int furiaMaxima;
 
-    // Constructor: le pasa vida (150) y energia (60) a Personaje
     public Guerrero(String nombre) {
+        // nombre, vida (150), vidaMaxima (150), energia (60), energiaMaxima (60), nivel (1)
         super(nombre, 150, 150, 60, 60, 1);
         this.furiaMaxima = 100;
         this.furia = 0;
@@ -43,7 +43,6 @@ public class Guerrero extends Personaje {
         objetivo.recibirDanio(40);
     }
 
-    // Método privado para gestionar el tope de furia
     private void acumularFuria(int cantidad) {
         furia += cantidad;
         if (furia > furiaMaxima) {
