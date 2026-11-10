@@ -1,8 +1,8 @@
 public class Arquero extends Personaje {
     private int flechas;
 
-    // Constructor: vida inicial 110 y energía 80 según la guía
     public Arquero(String nombre, int flechas) {
+        // nombre, vida (110), vidaMaxima (110), energia (80), energiaMaxima (80), nivel (1)
         super(nombre, 110, 110, 80, 80, 1);
         this.flechas = flechas;
     }
@@ -12,16 +12,18 @@ public class Arquero extends Personaje {
     }
 
     public void dispararFlecha(Personaje objetivo) {
-        if (!estaVivo() || flechas <= 0) {
-            System.out.println(getNombre() + " no puede disparar flechas.");
+        if (!estaVivo() || !gastarEnergia(10)) {
             return;
         }
-        System.out.println("[Flecha] " + getNombre() + " dispara una FLECHA a " + objetivo.getNombre());
-        objetivo.recibirDanio(20);
+        if (flechas <= 0) {
+            System.out.println(getNombre() + " no tiene flechas para disparar.");
+            return;
+        }
         flechas--;
+        System.out.println("[Flecha] " + getNombre() + " dispara una FLECHA a " + objetivo.getNombre() + " (Flechas restantes: " + flechas + ")");
+        objetivo.recibirDanio(20);
     }
 
-    // Método que pide la guía (hace 50 de daño)
     public void lluviaDeFlechas(Personaje objetivo) {
         if (!estaVivo() || !gastarEnergia(25)) {
             return;
@@ -35,14 +37,13 @@ public class Arquero extends Personaje {
         objetivo.recibirDanio(50);
     }
 
-    // Método para reponer munición
-    public void recogerFlechas(int c) {
+    public void recargarFlechas(int c) {
         if (!estaVivo()) {
             return;
         }
         if (c > 0) {
             flechas += c;
-            System.out.println(getNombre() + " recoge flechas. Flechas actuales: " + flechas);
+            System.out.println(getNombre() + " recarga flechas. Flechas actuales: " + flechas);
         }
     }
 }
